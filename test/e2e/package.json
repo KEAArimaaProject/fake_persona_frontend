@@ -1,0 +1,19 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "playwright.config.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "cross-env HEADLESS=false npx playwright test",
+    "test:slow": "cross-env HEADLESS=false SLOW_MO=500 npx playwright test",
+    "test:headless": "cross-env HEADLESS=true npx playwright test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "cross-env": "^10.1.0"
+  }
+}
