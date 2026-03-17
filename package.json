@@ -1,0 +1,26 @@
+{
+  "name": "fake_persona_frontend",
+  "version": "1.0.0",
+  "description": "Frontent for the [Fake Data Generator](https://github.com/arturomorarioja/fake_info), which generates fake data of nonexistent Danish persons.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KEAArimaaProject/fake_persona_frontend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/KEAArimaaProject/fake_persona_frontend/issues"
+  },
+  "homepage": "https://github.com/KEAArimaaProject/fake_persona_frontend#readme",
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

@@ -7,7 +7,7 @@ document.querySelector('#frmGenerate').addEventListener('submit', (e) => {
     let endpoint = '/';
     if (e.target.chkPerson.checked) {
         endpoint += 'person'
-        const numPersons = parseInt(e.target.txtNumberPersons.value);
+        const numPersons = Number.parseInt(e.target.txtNumberPersons.value);
         if (numPersons > 1) {
             endpoint += '?n=' + numPersons;
         }
@@ -18,10 +18,10 @@ document.querySelector('#frmGenerate').addEventListener('submit', (e) => {
     // API call
     fetch(baseUrl + endpoint)
     .then(response => {
-        if (!response.ok) {
-            handleError();
-        } else {
+        if (response.ok) {
             return response.json();
+        } else {
+            handleError();
         }
     })
     .then(handlePersonData)
