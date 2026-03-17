@@ -12,3 +12,11 @@ JavaScript / CSS3 / HTML5
 
 ## Author
 Arturo Mora-Rioja
+
+## Use SonarQube locally for static testing:
+
+### For Jetbrains IDE's:
+- donwload the plugin "SonarQube for IDE"
+- Restart the IDE
+- go to View -> Tool Windows -> SonarQube for IDE
+- You now have a tool window that enables you to analyze individual files, or the whole project.
