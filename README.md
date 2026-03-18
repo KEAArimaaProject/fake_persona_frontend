@@ -39,3 +39,9 @@ Serving HTTP on :: port 5500 (http://[::]:5500/) ...
 - Restart the IDE
 - go to View -> Tool Windows -> SonarQube for IDE
 - You now have a tool window that enables you to analyze individual files, or the whole project.
+
+## Run playwright tests:
+
+[test/e2e/testDocumentation.md](test/e2e/testDocumentation.md)
+
+
