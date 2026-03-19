@@ -7,7 +7,11 @@
     "test": "npx playwright test --config=test/e2e/playwright.config.js",
     "test:headed": "cross-env HEADLESS=false npx playwright test --config=test/e2e/playwright.config.js",
     "test:slow": "cross-env HEADLESS=false SLOW_MO=500 npx playwright test --config=test/e2e/playwright.config.js",
-    "test:headless": "cross-env HEADLESS=true npx playwright test --config=test/e2e/playwright.config.js"
+    "test:headless": "cross-env HEADLESS=true npx playwright test --config=test/e2e/playwright.config.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier . --write",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -22,10 +26,18 @@
   },
   "homepage": "https://github.com/KEAArimaaProject/fake_persona_frontend#readme",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.58.2",
     "@types/node": "^25.5.0",
+    "@typescript-eslint/eslint-plugin": "^8.57.1",
+    "@typescript-eslint/parser": "^8.57.1",
+    "cross-env": "^10.1.0",
+    "eslint": "^10.0.3",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "^3.8.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "@playwright/test": "^1.58.2",
-    "cross-env": "^10.1.0"
+    "typescript-eslint": "^8.57.1"
   }
 }
