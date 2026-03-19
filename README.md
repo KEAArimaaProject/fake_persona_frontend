@@ -48,3 +48,15 @@ Arturo Mora-Rioja
 [test/e2e/testDocumentation.md](test/e2e/testDocumentation.md)
 
 
+
+## Linting and Formatting Scripts
+
+- **`npm run lint`**: Runs ESLint on the entire project (`.` targets all files). Reports code quality issues, TypeScript errors, and style violations.
+
+- **`npm run lint:fix`**: Runs ESLint with `--fix` flag. Auto-fixes many issues (e.g., simple formatting, unused vars); manual review recommended.
+
+- **`npm run format`**: Runs Prettier with `--write` on all files. Enforces consistent code style (semi-colons, single quotes, 2-space indents per `.prettierrc.json`).
+
+- **`npm run prepare`**: Runs `husky install` post-`npm install`. Sets up Git hooks for pre-commit linting/formatting (install Husky first: `npm i -D husky lint-staged` then `npx husky init`).
+
+Run from project root.
