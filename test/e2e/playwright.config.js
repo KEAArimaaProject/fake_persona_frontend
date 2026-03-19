@@ -9,6 +9,8 @@ module.exports = defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: [['html', { outputFolder: 'playwright-report' }]],
   outputDir: 'test-results',
+  // App is served on 5500; API is at http://localhost:8080/api (see src/js/info.js).
+  // Backend must allow CORS from http://localhost:5500 for e2e tests to pass.
   use: {
     baseURL: 'http://localhost:5500',
     trace: 'on-first-retry',
