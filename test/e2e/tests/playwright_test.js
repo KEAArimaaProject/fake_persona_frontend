@@ -7,11 +7,11 @@ test.describe('Fake Persona Generation', () => {
     await expect(page.locator('#output')).not.toHaveClass(/hidden/);
   }
 
-  async function runPartialGeneration(page, selectMethod, ...expectFns) {
+  async function runPartialGeneration(page, getMethod, ...expectFns) {
     const helpers = createPersonaHelpers(page);
     await helpers.visitHome();
-    await helpers.selectPartialGeneration();
-    await helpers[selectMethod]();
+    await helpers.getPartialGeneration();
+    await helpers[getMethod]();
     await helpers.clickGenerate();
 
     await ensureOutputVisible(page);
@@ -27,13 +27,13 @@ test.describe('Fake Persona Generation', () => {
     //Last name: Kjær
     //Gender: male
     test('should generate name and gender', async ({ page }) => {
-      await runPartialGeneration(page, 'selectNameGender', expectNameGenderResults);
+      await runPartialGeneration(page, 'getNameGender', expectNameGenderResults);
     });
 
     //eg.
     //CPR: 2510002438
     test('should generate CPR', async ({ page }) => {
-      await runPartialGeneration(page, 'selectCpr', expectCpr);
+      await runPartialGeneration(page, 'getCpr', expectCpr);
     });
 
     //eg.
@@ -42,7 +42,7 @@ test.describe('Fake Persona Generation', () => {
     //Gender: male
     //Date of birth: 1923-12-30
     test('should generate name, gender and date of birth', async ({ page }) => {
-      await runPartialGeneration(page, 'selectNameGenderDob', expectNameGenderResults, expectDob);
+      await runPartialGeneration(page, 'getNameGenderDob', expectNameGenderResults, expectDob);
     });
 
     //eg.
@@ -51,7 +51,7 @@ test.describe('Fake Persona Generation', () => {
     //Last name: Kjær
     //Gender: male
     test('should generate CPR, name and gender', async ({ page }) => {
-      await runPartialGeneration(page, 'selectCprNameGender', expectCpr, expectNameGenderResults);
+      await runPartialGeneration(page, 'getCprNameGender', expectCpr, expectNameGenderResults);
     });
 
     //eg.
@@ -61,20 +61,20 @@ test.describe('Fake Persona Generation', () => {
     //Gender: male
     //Date of birth: 1923-12-30
     test('should generate CPR, name, gender and date of birth', async ({ page }) => {
-      await runPartialGeneration(page, 'selectCprNameGenderDob', expectCpr, expectNameGenderResults, expectDob);
+      await runPartialGeneration(page, 'getCprNameGenderDob', expectCpr, expectNameGenderResults, expectDob);
     });
 
     //eg.
     //Address: BzJytbiXfknhyqaNNGØQuSæLTC ZæLådRårNlXuA 523, 56.tv
     //6541 Bevtoft
     test('should generate address', async ({ page }) => {
-      await runPartialGeneration(page, 'selectAddress', expectStreet, expectTown);
+      await runPartialGeneration(page, 'getAddress', expectStreet, expectTown);
     });
 
     //eg.
     //Phone number: 57126685
     test('should generate phone number', async ({ page }) => {
-      await runPartialGeneration(page, 'selectPhone', expectPhone);
+      await runPartialGeneration(page, 'getPhone', expectPhone);
     });
 
   });
@@ -102,7 +102,7 @@ test.describe('Fake Persona Generation', () => {
       test(`should generate ${name} in ui`, async ({ page }) => {
         const helpers = createPersonaHelpers(page);
         await helpers.visitHome();
-        await helpers.selectPerson(count.toString());
+        await helpers.getPerson(count.toString());
         await helpers.clickGenerate();
 
         await expectPersonWithCount(page, count);

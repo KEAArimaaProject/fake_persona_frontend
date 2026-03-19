@@ -5,7 +5,7 @@ function createPersonaHelpers(page) {
     await page.goto('/');
   }
 
-  async function selectPartialGeneration() {
+  async function getPartialGeneration() {
     const radio = page.locator('#chkPartialOptions');
     await expect(radio).toBeVisible();
     if (!(await radio.isChecked())) {
@@ -13,49 +13,49 @@ function createPersonaHelpers(page) {
     }
   }
 
-  async function selectNameGender() {
+  async function getNameGender() {
     const dropdown = page.locator('#cmbPartialOptions');
     await expect(dropdown).toBeVisible();
     await dropdown.selectOption('name-gender');
   }
 
-  async function selectCpr() {
+  async function getCpr() {
     const dropdown = page.locator('#cmbPartialOptions');
     await expect(dropdown).toBeVisible();
     await dropdown.selectOption('cpr');
   }
 
-  async function selectNameGenderDob() {
+  async function getNameGenderDob() {
     const dropdown = page.locator('#cmbPartialOptions');
     await expect(dropdown).toBeVisible();
     await dropdown.selectOption('name-gender-dob');
   }
 
-  async function selectCprNameGender() {
+  async function getCprNameGender() {
     const dropdown = page.locator('#cmbPartialOptions');
     await expect(dropdown).toBeVisible();
     await dropdown.selectOption('cpr-name-gender');
   }
 
-  async function selectCprNameGenderDob() {
+  async function getCprNameGenderDob() {
     const dropdown = page.locator('#cmbPartialOptions');
     await expect(dropdown).toBeVisible();
     await dropdown.selectOption('cpr-name-gender-dob');
   }
 
-  async function selectAddress() {
+  async function getAddress() {
     const dropdown = page.locator('#cmbPartialOptions');
     await expect(dropdown).toBeVisible();
     await dropdown.selectOption('address');
   }
 
-  async function selectPhone() {
+  async function getPhone() {
     const dropdown = page.locator('#cmbPartialOptions');
     await expect(dropdown).toBeVisible();
     await dropdown.selectOption('phone');
   }
 
-  async function selectPerson(count) {
+  async function getPerson(count) {
     const radio = page.locator('#chkPerson');
     await expect(radio).toBeVisible();
     if (!(await radio.isChecked())) {
@@ -75,15 +75,15 @@ function createPersonaHelpers(page) {
 
   return {
     visitHome,
-    selectPartialGeneration,
-    selectNameGender,
-    selectCpr,
-    selectNameGenderDob,
-    selectCprNameGender,
-    selectCprNameGenderDob,
-    selectAddress,
-    selectPhone,
-    selectPerson,
+    getPartialGeneration,
+    getNameGender,
+    getCpr,
+    getNameGenderDob,
+    getCprNameGender,
+    getCprNameGenderDob,
+    getAddress,
+    getPhone,
+    getPerson,
     clickGenerate
   };
 }
