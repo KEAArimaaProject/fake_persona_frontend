@@ -4,7 +4,10 @@
   "description": "Frontent for the [Fake Data Generator](https://github.com/arturomorarioja/fake_info), which generates fake data of nonexistent Danish persons.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx playwright test --config=test/e2e/playwright.config.js",
+    "test:headed": "cross-env HEADLESS=false npx playwright test --config=test/e2e/playwright.config.js",
+    "test:slow": "cross-env HEADLESS=false SLOW_MO=500 npx playwright test --config=test/e2e/playwright.config.js",
+    "test:headless": "cross-env HEADLESS=true npx playwright test --config=test/e2e/playwright.config.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +24,8 @@
   "devDependencies": {
     "@types/node": "^25.5.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "@playwright/test": "^1.58.2",
+    "cross-env": "^10.1.0"
   }
 }
