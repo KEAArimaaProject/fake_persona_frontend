@@ -89,13 +89,15 @@ const handlePersonData = (data) => {
 
 const handleError = () => {
     const output = document.querySelector('#output');
-    
-    output.innerHTML = 
+
+    output.innerHTML =
     '<p>There was a problem communicating with the API</p>';
     output.classList.add('error');
+    output.classList.remove('hidden');
 
     setTimeout(() => {
         output.innerHTML = '';
         output.classList.remove('error');
+        output.classList.add('hidden');
     }, 2000);
 };

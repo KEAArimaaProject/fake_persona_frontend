@@ -1,7 +1,8 @@
 
 
 # to run the playwright tests:
-- first: make sure the fontend and backend are running (see README.md)
+- Start the backend (see README.md). The frontend is started automatically by Playwright on port 5500.
+- The backend must allow CORS from `http://localhost:5500` (the test server origin). Without this, API calls fail and tests will fail.
 
 ### Headless
 - PS C:\Users\USER\MYPROJECYTS\fake_persona_frontend> $env:HEADLESS="true"; .\node_modules\.bin\playwright.cmd test --config=test/e2e/playwright.config.js
