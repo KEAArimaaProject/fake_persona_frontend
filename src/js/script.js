@@ -6,7 +6,7 @@ document.querySelector('#frmGenerate').addEventListener('submit', (e) => {
     // The endpoint is inferred from the selected option
     let endpoint = '/';
     if (e.target.chkPerson.checked) {
-        endpoint += 'person'
+        endpoint += 'person';
         const numPersons = Number.parseInt(e.target.txtNumberPersons.value);
         if (numPersons > 1) {
             endpoint += '?n=' + numPersons;
@@ -17,15 +17,15 @@ document.querySelector('#frmGenerate').addEventListener('submit', (e) => {
 
     // API call
     fetch(baseUrl + endpoint)
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            handleError();
-        }
-    })
-    .then(handlePersonData)
-    .catch(handleError);
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                handleError();
+            }
+        })
+        .then(handlePersonData)
+        .catch(handleError);
 });
 
 const handlePersonData = (data) => {
@@ -36,8 +36,11 @@ const handlePersonData = (data) => {
         data = [data];
     }
 
-    data.forEach(item => {
-        const personCard = document.importNode(document.getElementById('personTemplate').content, true);
+    data.forEach((item) => {
+        const personCard = document.importNode(
+            document.getElementById('personTemplate').content,
+            true,
+        );
         if (item.CPR !== undefined) {
             const cprValue = personCard.querySelector('.cprValue');
             cprValue.innerText = item.CPR;
@@ -53,13 +56,13 @@ const handlePersonData = (data) => {
             lastNameValue.classList.remove('hidden');
             personCard.querySelector('.firstName').classList.remove('hidden');
             personCard.querySelector('.lastName').classList.remove('hidden');
-        }    
+        }
         if (item.gender !== undefined) {
             const genderValue = personCard.querySelector('.genderValue');
             genderValue.innerText = item.gender;
             genderValue.classList.remove('hidden');
             personCard.querySelector('.gender').classList.remove('hidden');
-        }        
+        }
         if (item.birthDate !== undefined) {
             const dobValue = personCard.querySelector('.dobValue');
             dobValue.innerText = item.birthDate;
@@ -76,7 +79,8 @@ const handlePersonData = (data) => {
             personCard.querySelector('.address').classList.remove('hidden');
         }
         if (item.phoneNumber !== undefined) {
-            const phoneNumberValue = personCard.querySelector('.phoneNumberValue');
+            const phoneNumberValue =
+                personCard.querySelector('.phoneNumberValue');
             phoneNumberValue.innerText = item.phoneNumber;
             phoneNumberValue.classList.remove('hidden');
             personCard.querySelector('.phoneNumber').classList.remove('hidden');
@@ -90,8 +94,7 @@ const handlePersonData = (data) => {
 const handleError = () => {
     const output = document.querySelector('#output');
 
-    output.innerHTML =
-    '<p>There was a problem communicating with the API</p>';
+    output.innerHTML = '<p>There was a problem communicating with the API</p>';
     output.classList.add('error');
     output.classList.remove('hidden');
 
