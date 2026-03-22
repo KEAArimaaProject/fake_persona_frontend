@@ -114,3 +114,70 @@ After this setup:
 Every teammate only needs to do it once.
 All future git commit / git push just work.
 No more --no-verify, no more bash errors, no more frustration.
+
+
+
+# GitHub Actions CI Setup (one-time)
+
+**No backend needed** - tests generate fake data client-side in the browser.
+
+### Repo Settings:
+1. Go to repo Settings > Secrets and variables > Actions.
+2. Add `SONAR_TOKEN`: create account at [sonarcloud.io](https://sonarcloud.io), generate token, paste.
+
+### Create CI Workflow:
+Create file `.github/workflows/ci.yml`:
+
+```yaml
+name: CI
+
+on:
+  push:
+    branches: [ "main", "develop", "Frontend-CICD-firstbranch" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  lint-test:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: "npm"
+    - name: Install deps
+      run: npm ci
+    - name: Lint
+      run: npm run lint
+    - name: Cache Playwright
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/ms-playwright
+        key: playwright-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js') }}
+    - name: Install Playwright
+      run: npx playwright install --with-deps
+    - name: Test
+      run: npm run test:headless
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-report
+        path: test-results/
+        retention-days: 30
+
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - uses: SonarSource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+```
+3. Commit & push `.github/workflows/ci.yml` - Actions will run automatically on pushes/PRs.
