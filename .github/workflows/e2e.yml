@@ -58,7 +58,7 @@ jobs:
         # ^ installs Chromium (default) + required OS dependencies automatically
 
       - name: Run Playwright tests
-        run: npm test:headless
+        run: npm run test:headless
         # or: npx playwright test --config=test/e2e/playwright.config.js
         # (your package.json already calls it correctly)
 
