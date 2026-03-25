@@ -1,0 +1,73 @@
+name: E2E Tests (Playwright)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    timeout-minutes: 60          # generous timeout for E2E
+    runs-on: ubuntu-latest
+    env:
+      BACKEND_BRANCH: "Backend-unit-tests-#26" # Backend branch
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20           # LTS in March 2026; change to 22 if you prefer
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci                  # clean & fast install
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Start Backend (Fake Info API)
+        run: |
+          git clone --branch "$BACKEND_BRANCH" --single-branch https://github.com/KEAArimaaProject/fake_persona_backend.git ../backend
+          cd ../backend/mandatory-one
+          docker compose -f db/docker-compose.yml up -d
+          chmod +x ./mvnw
+          ./mvnw spring-boot:run &
+          # Wait for backend ready (up to ~60s)
+          n=0
+          while [ $n -lt 12 ]; do
+            if curl -f http://localhost:8080/api/person; then
+              break
+            fi
+            sleep 5
+            n=$((n + 1))
+          done
+          if [ $n -eq 12 ]; then
+            echo "Backend failed to start"
+            exit 1
+          fi
+
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+        # ^ installs Chromium (default) + required OS dependencies automatically
+
+      - name: Run Playwright tests
+        run: npm run test:headless
+        # or: npx playwright test --config=test/e2e/playwright.config.js
+        # (your package.json already calls it correctly)
+
+      - name: Upload test report (on failure or always)
+        if: failure()        # upload report only if tests fail   #alternative:  always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/   # default location; change if your config overrides it
+          retention-days: 30
+
+
