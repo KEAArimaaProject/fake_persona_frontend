@@ -41,9 +41,9 @@ const handlePersonData = (data) => {
             document.getElementById('personTemplate').content,
             true,
         );
-        if (item.CPR !== undefined) {
+        if (item.cpr !== undefined) {
             const cprValue = personCard.querySelector('.cprValue');
-            cprValue.innerText = item.CPR;
+            cprValue.innerText = item.cpr;
             cprValue.classList.remove('hidden');
             personCard.querySelector('.cpr').classList.remove('hidden');
         }
@@ -74,7 +74,7 @@ const handlePersonData = (data) => {
             streetValue.innerText = `${item.address.street} ${item.address.number}, ${item.address.floor}.${item.address.door}`;
             streetValue.classList.remove('hidden');
             const townValue = personCard.querySelector('.townValue');
-            townValue.innerText = `${item.address.postal_code} ${item.address.town_name}`;
+            townValue.innerText = `${item.address.postalCode} ${item.address.townName}`;
             townValue.classList.remove('hidden');
             personCard.querySelector('.address').classList.remove('hidden');
         }

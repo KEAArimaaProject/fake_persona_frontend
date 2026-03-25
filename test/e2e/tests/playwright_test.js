@@ -129,7 +129,7 @@ test.describe('Fake Persona Generation', () => {
                 await helpers.visitHome();
                 await helpers.getPerson(count.toString());
                 await helpers.clickGenerate();
-
+                await page.waitForTimeout(10000);
                 await expectPersonWithCount(page, count);
             });
         }
