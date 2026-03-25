@@ -28,7 +28,7 @@ document.querySelector('#frmGenerate').addEventListener('submit', (e) => {
         .catch(handleError);
 });
 
-const handlePersonData = (data) => {
+const handlePersonData                       = (data) => {
     const output = document.querySelector('#output');
     output.innerHTML = '';
 
