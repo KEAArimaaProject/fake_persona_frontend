@@ -10,6 +10,8 @@ jobs:
   test:
     timeout-minutes: 60          # generous timeout for E2E
     runs-on: ubuntu-latest
+    env:
+      BACKEND_BRANCH: "Backend-unit-tests-#26" # Backend branch
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,7 +33,7 @@ jobs:
 
       - name: Start Backend (Fake Info API)
         run: |
-          git clone https://github.com/KEAArimaaProject/fake_persona_backend.git ../backend
+          git clone --branch "$BACKEND_BRANCH" --single-branch https://github.com/KEAArimaaProject/fake_persona_backend.git ../backend
           cd ../backend/mandatory-one
           docker compose -f db/docker-compose.yml up -d
           chmod +x ./mvnw
