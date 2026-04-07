@@ -14,7 +14,7 @@ JavaScript / CSS3 / HTML5
 Arturo Mora-Rioja
 
 ## to run the backend:
-- The project requires Java 21
+- The project supports Java 21
 - start docker desktop
 - start the database:
   - in a powershell, run PS C:\Users\USER\MYPROJECTS\fake_persona_backend\mandatory-one> `docker compose -f db\docker-compose.yml up -d`
